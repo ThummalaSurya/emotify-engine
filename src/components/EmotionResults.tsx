@@ -46,9 +46,6 @@ export const EmotionResults = ({ result }: Props) => {
       </div>
 
       <div className="space-y-3">
-        {/* bars below */}
-      </div>
-      <div className="space-y-3">
 
         {sorted.map(({ key, value }) => {
           const e = EMOTIONS[key];
