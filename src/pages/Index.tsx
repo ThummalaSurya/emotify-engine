@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { Sparkles, Loader2, Wand2 } from "lucide-react";
+import { Sparkles, Loader2, Wand2, ListTodo } from "lucide-react";
 import { EmotionResults } from "@/components/EmotionResults";
 import { HistoryList } from "@/components/HistoryList";
 import type { EmotionResult } from "@/lib/emotions";
@@ -64,9 +65,17 @@ const Index = () => {
     <main className="min-h-screen px-4 py-10 sm:py-16">
       <div className="mx-auto max-w-3xl">
         <header className="text-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur border border-border/50 shadow-soft mb-6">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-xs font-semibold uppercase tracking-wider">NLP Emotion AI</span>
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur border border-border/50 shadow-soft">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-xs font-semibold uppercase tracking-wider">NLP Emotion AI</span>
+            </div>
+            <Link
+              to="/tasks"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur border border-border/50 shadow-soft text-xs font-semibold uppercase tracking-wider hover:bg-white transition-colors"
+            >
+              <ListTodo className="w-4 h-4 text-primary" /> Tasks
+            </Link>
           </div>
           <h1 className="text-5xl sm:text-7xl font-black mb-4 leading-[0.95]">
             What does your <br />
