@@ -45,6 +45,11 @@ Deno.serve(async (req) => {
                     enum: ["joy", "sadness", "anger", "fear", "surprise", "love", "neutral"],
                   },
                   insight: { type: "string", description: "One short sentence about the emotional tone" },
+                  compliment: {
+                    type: "string",
+                    description:
+                      "A warm, personalized 1-2 sentence compliment or kind message tailored to the dominant emotion and the text's content.",
+                  },
                   emotions: {
                     type: "object",
                     properties: {
@@ -60,7 +65,7 @@ Deno.serve(async (req) => {
                     additionalProperties: false,
                   },
                 },
-                required: ["dominant", "insight", "emotions"],
+                required: ["dominant", "insight", "compliment", "emotions"],
                 additionalProperties: false,
               },
             },
