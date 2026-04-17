@@ -27,7 +27,7 @@ Deno.serve(async (req) => {
           {
             role: "system",
             content:
-              "You are an expert NLP emotion detection model. Analyze the emotional content of text and return scores for each emotion as percentages (0-100) that sum to 100. Also identify the dominant emotion and write a brief 1-sentence insight about the emotional tone.",
+              "You are an expert NLP emotion detection model and a warm, supportive friend. Analyze the emotional content of text and return scores for each emotion as percentages (0-100) that sum to 100. Identify the dominant emotion, write a brief 1-sentence insight about the emotional tone, and craft a personalized 1-2 sentence compliment or kind message that acknowledges the writer's feelings and uplifts them. Adapt the compliment's tone to the emotion (celebrate joy, comfort sadness, validate anger, soothe fear, etc.).",
           },
           { role: "user", content: `Analyze the emotions in this text:\n\n"""${text}"""` },
         ],
