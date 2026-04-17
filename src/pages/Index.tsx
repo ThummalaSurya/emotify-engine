@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Sparkles, Loader2, Wand2 } from "lucide-react";
 import { EmotionResults } from "@/components/EmotionResults";
+import { HistoryList } from "@/components/HistoryList";
 import type { EmotionResult } from "@/lib/emotions";
 
 const SAMPLES = [
@@ -18,6 +19,7 @@ const Index = () => {
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<EmotionResult | null>(null);
+  const [historyKey, setHistoryKey] = useState(0);
 
   const analyze = async () => {
     if (!text.trim()) {
@@ -32,13 +34,30 @@ const Index = () => {
       });
       if (error) throw error;
       if (data?.error) throw new Error(data.error);
-      setResult(data as EmotionResult);
+      const r = data as EmotionResult;
+      setResult(r);
+
+      const { error: insertError } = await supabase.from("emotion_analyses").insert({
+        text,
+        dominant: r.dominant,
+        insight: r.insight,
+        compliment: r.compliment,
+        emotions: r.emotions,
+      });
+      if (insertError) console.error("Failed to save history:", insertError);
+      else setHistoryKey((k) => k + 1);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Something went wrong";
       toast.error(msg);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSelectHistory = (entry: { text: string }) => {
+    setText(entry.text);
+    toast.success("Loaded entry — tap Detect to re-analyze");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -113,6 +132,9 @@ const Index = () => {
             <p>Seven emotions detected with NLP precision.</p>
           </div>
         )}
+
+        <HistoryList refreshKey={historyKey} onSelect={handleSelectHistory} />
+
 
         <footer className="text-center text-xs text-muted-foreground mt-12">
           Powered by Lovable AI · Built with NLP

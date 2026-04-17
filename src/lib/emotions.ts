@@ -15,5 +15,6 @@ export const EMOTION_ORDER: EmotionKey[] = ["joy", "love", "surprise", "neutral"
 export interface EmotionResult {
   dominant: EmotionKey;
   insight: string;
+  compliment: string;
   emotions: Record<EmotionKey, number>;
 }

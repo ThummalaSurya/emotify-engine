@@ -29,10 +29,24 @@ export const EmotionResults = ({ result }: Props) => {
         <h2 className="text-3xl sm:text-4xl font-black mb-3" style={{ color: dominant.color }}>
           {dominant.label}
         </h2>
-        <p className="text-foreground/80 max-w-md text-base sm:text-lg italic">"{result.insight}"</p>
+        <p className="text-foreground/80 max-w-md text-base sm:text-lg italic mb-5">"{result.insight}"</p>
+
+        <div
+          className="max-w-md rounded-2xl px-5 py-4 border-2 text-left"
+          style={{
+            background: `linear-gradient(135deg, ${dominant.color}15, ${dominant.color}05)`,
+            borderColor: `${dominant.color}40`,
+          }}
+        >
+          <p className="text-xs uppercase tracking-[0.18em] font-bold mb-1.5" style={{ color: dominant.color }}>
+            ✨ A note for you
+          </p>
+          <p className="text-sm sm:text-base text-foreground/90 leading-relaxed">{result.compliment}</p>
+        </div>
       </div>
 
       <div className="space-y-3">
+
         {sorted.map(({ key, value }) => {
           const e = EMOTIONS[key];
           const pct = Math.round(value);
